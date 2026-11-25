@@ -22,10 +22,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.onesignal.OneSignal;
-import com.onesignal.Continue;
-import org.json.JSONObject;
-
 public class MainActivity extends AppCompatActivity {
 
     public static MainActivity instance;
@@ -41,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         instance = this;
 
-        // Uçtan uca (Full Bleed) tam şeffaf durum çubuğu: Web sitesi krem arka planı saatin arkasına kadar pürüzsüz uzanır
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().setStatusBarColor(Color.WHITE);
 
@@ -50,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
         webView = findViewById(R.id.webView);
         progressBar = findViewById(R.id.progressBar);
 
-        // Android 15/16 Edge-to-Edge Güvenli Alanı:
-        // Üst = 0: Web sitesinin rengi saatin arkasına kadar kesintisiz uzanır (Full Bleed)
-        // Alt = insets.bottom: Alt menü butonları telefonun Home/Back tuşlarının üstünde tertemiz durur
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.mainRoot), (v, windowInsets) -> {
             Insets insets = windowInsets.getInsets(
                 WindowInsetsCompat.Type.systemBars() |
@@ -62,16 +54,11 @@ public class MainActivity extends AppCompatActivity {
             return windowInsets;
         });
 
-        // Durum çubuğu ikonlarını koyu (siyah) yapıyoruz (açık zemin üzerinde net okunsun)
         WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView())
             .setAppearanceLightStatusBars(true);
 
-        // Bildirim İzni İsteme (Android 13+)
-        // OneSignal.getNotifications().requestPermission(true, Continue.with(r -> {}));
-
         setupWebView();
 
-        // Geri tuşu yönetimi
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -84,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Açılış URL'i çözümleme (Bildirim tıklaması, deep link veya ana sayfa)
         String openUrl = resolveTargetUrl(getIntent());
         webView.loadUrl(openUrl);
     }
@@ -109,19 +95,6 @@ public class MainActivity extends AppCompatActivity {
                 String u = intent.getStringExtra("target_url");
                 if (u != null && !u.trim().isEmpty()) return u;
             }
-            if (intent.hasExtra("onesignal_data")) {
-                try {
-                    JSONObject obj = new JSONObject(intent.getStringExtra("onesignal_data"));
-                    if (obj.has("custom")) {
-                        JSONObject custom = new JSONObject(obj.getString("custom"));
-                        if (custom.has("a")) {
-                            JSONObject a = custom.getJSONObject("a");
-                            if (a.has("url")) return a.getString("url");
-                        }
-                        if (custom.has("u")) return custom.getString("u");
-                    }
-                } catch (Exception ignored) {}
-            }
         }
         return DEFAULT_URL;
     }
@@ -141,15 +114,13 @@ public class MainActivity extends AppCompatActivity {
         settings.setLoadWithOverviewMode(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        settings.setUserAgentString(settings.getUserAgentString() + " IndirimTrendimApp/1.0");
+        settings.setUserAgentString(settings.getUserAgentString() + " EhliyetCepteApp/1.0.4");
 
-        // Dokunma ve Tıklama Hızı Optimizasyonu (300ms gecikmeyi sıfırlar, Chrome gibi doğrudan tepki verir):
         settings.setSupportZoom(false);
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
         settings.setNeedInitialFocus(false);
 
-        // Web iÃ§inden yerel Android PaylaÅŸÄ±m Intent'i tetikleme kÃ¶prÃ¼sÃ¼:
         webView.addJavascriptInterface(new Object() {
             @android.webkit.JavascriptInterface
             public void shareApp(String text, String url) {
@@ -158,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
                     sendIntent.setAction(Intent.ACTION_SEND);
                     sendIntent.putExtra(Intent.EXTRA_TEXT, text + (text.endsWith("\n") ? "" : " ") + url);
                     sendIntent.setType("text/plain");
-                    Intent shareIntent = Intent.createChooser(sendIntent, "UygulamayÄ± PaylaÅŸ");
+                    Intent shareIntent = Intent.createChooser(sendIntent, "Uygulamayı Paylaş");
                     shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(shareIntent);
                 } catch (Exception e) {
@@ -171,11 +142,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
-                // Sitenin kendi linkleri uygulama içinde kalsın
-                if (url.startsWith("http://127.0.0.1:5700") || url.startsWith("http://indirimtrendim.com")) {
+                if (url.startsWith("file:///android_asset/") || url.startsWith("file://") || url.startsWith("about:blank") || url.startsWith("javascript:")) {
                     return false;
                 }
-                // Harici linkler (WhatsApp, Telegram, Mağaza linkleri) dış uygulamada açılsın
                 try {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
@@ -188,40 +157,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                progressBar.setVisibility(View.VISIBLE);
+                if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                progressBar.setVisibility(View.GONE);
+                if (progressBar != null) progressBar.setVisibility(View.GONE);
             }
         });
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
-                progressBar.setProgress(newProgress);
-                if (newProgress == 100) {
-                    progressBar.setVisibility(View.GONE);
+                if (progressBar != null) {
+                    progressBar.setProgress(newProgress);
+                    if (newProgress >= 100) {
+                        progressBar.setVisibility(View.GONE);
+                    }
                 }
             }
         });
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        setIntent(intent);
-        String target = resolveTargetUrl(intent);
-        loadTargetUrl(target);
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (instance == this) {
-            instance = null;
-        }
-        super.onDestroy();
     }
 }
