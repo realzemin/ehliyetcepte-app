@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity instance;
     public static String TARGET_URL = null;
 
-    private static final String DEFAULT_URL = "http://127.0.0.1:5700";
+    private static final String DEFAULT_URL = "file:///android_asset/index.html";
     public WebView webView;
     private ProgressBar progressBar;
 
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Uçtan uca (Full Bleed) tam şeffaf durum çubuğu: Web sitesi krem arka planı saatin arkasına kadar pürüzsüz uzanır
         WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        getWindow().setStatusBarColor(Color.WHITE);
 
         setContentView(R.layout.activity_main);
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 WindowInsetsCompat.Type.systemBars() |
                 WindowInsetsCompat.Type.displayCutout()
             );
-            v.setPadding(insets.left, 0, insets.right, insets.bottom);
+            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
             return windowInsets;
         });
 
@@ -130,6 +130,10 @@ public class MainActivity extends AppCompatActivity {
     private void setupWebView() {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
+        settings.setAllowFileAccess(true);
+        settings.setAllowContentAccess(true);
+        settings.setAllowFileAccessFromFileURLs(true);
+        settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
         settings.setLoadsImagesAutomatically(true);
