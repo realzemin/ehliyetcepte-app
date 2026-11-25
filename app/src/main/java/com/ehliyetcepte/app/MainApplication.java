@@ -16,7 +16,7 @@ public class MainApplication extends Application {
 
         // OneSignal Başlatma
         OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
-        OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
+        // OneSignal.initWithContext(this, ONESIGNAL_APP_ID); // İndirim bildirimlerinin gelmemesi için devre dışı bırakıldı
 
         // Bildirime tıklandığında linki doğrudan uygulama içinde aç
         OneSignal.getNotifications().addClickListener(event -> {

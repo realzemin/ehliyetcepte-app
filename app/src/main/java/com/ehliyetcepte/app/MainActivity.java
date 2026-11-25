@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             .setAppearanceLightStatusBars(true);
 
         // Bildirim İzni İsteme (Android 13+)
-        OneSignal.getNotifications().requestPermission(true, Continue.with(r -> {}));
+        // OneSignal.getNotifications().requestPermission(true, Continue.with(r -> {}));
 
         setupWebView();
 
