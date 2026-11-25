@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'com.indirimtrendim.app'
+    namespace 'com.ehliyetcepte.app'
     compileSdk 36
 
     defaultConfig {
-        applicationId "com.indirimtrendim.app"
+        applicationId "com.ehliyetcepte.app"
         minSdk 24
         targetSdk 36
-        versionCode 10
-        versionName "1.0.9"
+        versionCode 1
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

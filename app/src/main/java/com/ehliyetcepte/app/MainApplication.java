@@ -1,4 +1,4 @@
-package com.indirimtrendim.app;
+package com.ehliyetcepte.app;
 
 import android.app.Application;
 import android.content.Intent;
@@ -29,7 +29,7 @@ public class MainApplication extends Application {
                 targetUrl = event.getNotification().getLaunchURL();
             }
             if (targetUrl == null || targetUrl.trim().isEmpty()) {
-                targetUrl = "https://indirimtrendim.com";
+                targetUrl = "http://127.0.0.1:5700";
             }
             
             MainActivity.TARGET_URL = targetUrl;

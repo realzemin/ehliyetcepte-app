@@ -1,4 +1,4 @@
-package com.indirimtrendim.app;
+package com.ehliyetcepte.app;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     public static MainActivity instance;
     public static String TARGET_URL = null;
 
-    private static final String DEFAULT_URL = "https://indirimtrendim.com";
+    private static final String DEFAULT_URL = "http://127.0.0.1:5700";
     public WebView webView;
     private ProgressBar progressBar;
 
@@ -145,12 +145,30 @@ public class MainActivity extends AppCompatActivity {
         settings.setDisplayZoomControls(false);
         settings.setNeedInitialFocus(false);
 
+        // Web iÃ§inden yerel Android PaylaÅŸÄ±m Intent'i tetikleme kÃ¶prÃ¼sÃ¼:
+        webView.addJavascriptInterface(new Object() {
+            @android.webkit.JavascriptInterface
+            public void shareApp(String text, String url) {
+                try {
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, text + (text.endsWith("\n") ? "" : " ") + url);
+                    sendIntent.setType("text/plain");
+                    Intent shareIntent = Intent.createChooser(sendIntent, "UygulamayÄ± PaylaÅŸ");
+                    shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(shareIntent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "AndroidBridge");
+
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 String url = request.getUrl().toString();
                 // Sitenin kendi linkleri uygulama içinde kalsın
-                if (url.startsWith("https://indirimtrendim.com") || url.startsWith("http://indirimtrendim.com")) {
+                if (url.startsWith("http://127.0.0.1:5700") || url.startsWith("http://indirimtrendim.com")) {
                     return false;
                 }
                 // Harici linkler (WhatsApp, Telegram, Mağaza linkleri) dış uygulamada açılsın

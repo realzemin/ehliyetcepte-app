@@ -1,4 +1,4 @@
-name: Build IndirimTrendim APK
+name: Build EhliyetCepte APK
 
 on:
   push:
@@ -16,7 +16,6 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        ref: master
         fetch-depth: 0
 
     - name: Set up JDK 17
@@ -30,38 +29,17 @@ jobs:
       with:
         gradle-version: '8.5'
 
-    - name: Ensure Permanent Keystore Exists
-      run: |
-        if [ ! -f release.keystore ]; then
-          echo "Generating permanent release.keystore..."
-          keytool -genkey -v -keystore release.keystore -alias indirimtrendim -keyalg RSA -keysize 2048 -validity 10000 -storepass indirimtrendim123 -keypass indirimtrendim123 -dname "CN=Indirim Trendim, OU=Mobile, O=Indirim Trendim, L=Istanbul, ST=Istanbul, C=TR"
-          keytool -export -rfc -keystore release.keystore -alias indirimtrendim -file upload_cert.pem -storepass indirimtrendim123
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add release.keystore upload_cert.pem
-          git commit -m "Persist permanent release.keystore and upload_cert.pem" || true
-          git push origin master || true
-        else
-          echo "Permanent release.keystore already exists. Using it."
-        fi
-
     - name: Build APK and AAB Bundle (Release)
       run: gradle assembleRelease bundleRelease
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: IndirimTrendim-APK
+        name: EhliyetCepte-APK
         path: app/build/outputs/apk/release/app-release.apk
 
     - name: Upload AAB Bundle Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: IndirimTrendim-AAB
+        name: EhliyetCepte-AAB
         path: app/build/outputs/bundle/release/app-release.aab
-
-    - name: Upload Keystore Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: IndirimTrendim-Keystore
-        path: release.keystore
