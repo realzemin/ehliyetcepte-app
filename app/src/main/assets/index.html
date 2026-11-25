@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>EhliyetCepte 2026 - Çıkmış Sınav Soruları & Denemeler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>EhliyetCepte 2026 - Çıkmış MEB Sınav Soruları & Denemeler</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -45,10 +45,9 @@
 
     /* HEADER */
     .top-header {
-      background: #0284c7;
       background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: #fff;
-      padding: 16px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -99,6 +98,20 @@
       box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
     }
 
+    /* PROGRESS BAR */
+    .progress-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: #0284c7;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
     /* MAIN CONTENT */
     .exam-area { padding: 16px; flex: 1; }
 
@@ -137,11 +150,25 @@
       background: #fafafa;
     }
     .option-item:hover { border-color: #0284c7; background: #f0f9ff; }
-    .option-item.selected {
-      border-color: #0284c7;
-      background: #e0f2fe;
-      color: #0369a1;
+    .option-item.correct {
+      border-color: #10b981 !important;
+      background: #ecfdf5 !important;
+      color: #047857 !important;
       font-weight: 800;
+    }
+    .option-item.correct .option-letter {
+      background: #10b981 !important;
+      color: #fff !important;
+    }
+    .option-item.wrong {
+      border-color: #ef4444 !important;
+      background: #fef2f2 !important;
+      color: #b91c1c !important;
+      font-weight: 800;
+    }
+    .option-item.wrong .option-letter {
+      background: #ef4444 !important;
+      color: #fff !important;
     }
     .option-letter {
       width: 28px; height: 28px;
@@ -152,16 +179,28 @@
       margin-right: 12px;
       flex-shrink: 0;
     }
-    .option-item.selected .option-letter {
-      background: #0284c7;
-      color: #fff;
+
+    /* EXPLANATION BOX */
+    .explanation-card {
+      display: none;
+      margin-top: 14px;
+      padding: 14px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid #10b981;
+      border-radius: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #166534;
+      animation: fadeIn 0.3s ease;
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ACTION BUTTONS */
     .nav-actions {
       display: flex;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 16px;
     }
     .btn-nav {
       flex: 1;
@@ -177,6 +216,27 @@
     .btn-prev { background: #e2e8f0; color: #475569; }
     .btn-next { background: #0284c7; color: #fff; box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35); }
     .btn-finish { background: #10b981; color: #fff; box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35); }
+
+    /* ADMOB BANNER */
+    .admob-banner {
+      margin-top: auto;
+      background: #f1f5f9;
+      border-top: 1px solid var(--border);
+      padding: 10px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .admob-tag {
+      background: #64748b;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
 
     /* SCORE MODAL */
     .score-modal {
@@ -198,47 +258,25 @@
       text-align: center;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
     }
-    .score-icon { font-size: 48px; margin-bottom: 8px; }
-    .score-badge { display: inline-block; padding: 6px 16px; border-radius: 9999px; font-weight: 800; font-size: 14px; margin-bottom: 14px; }
+    .score-icon { font-size: 48px; margin-bottom: 10px; }
+    .score-title { font-size: 20px; font-weight: 900; color: #0f172a; margin-bottom: 6px; }
+    .score-val { font-size: 40px; font-weight: 900; color: #0284c7; margin: 8px 0; }
+    .score-badge { display: inline-block; padding: 6px 16px; border-radius: 9999px; font-size: 13px; font-weight: 800; margin-bottom: 18px; }
     .badge-passed { background: #dcfce7; color: #15803d; }
     .badge-failed { background: #fee2e2; color: #b91c1c; }
-    .score-val { font-size: 38px; font-weight: 900; color: #0f172a; margin-bottom: 4px; }
-    .score-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      margin: 16px 0;
-      background: #f8fafc;
-      padding: 12px;
-      border-radius: 12px;
-    }
-    .stat-label { font-size: 11px; font-weight: 700; color: #64748b; }
-    .stat-val { font-size: 16px; font-weight: 900; }
-
-    /* ADMOB BANNER */
-    .admob-banner {
-      width: 100%;
-      height: 50px;
-      background: #f1f5f9;
-      border-top: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      position: sticky;
-      bottom: 0;
-      z-index: 30;
-    }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #f8fafc; padding: 14px; border-radius: 14px; margin-bottom: 20px; }
+    .stat-label { font-size: 11px; color: #64748b; font-weight: 700; margin-bottom: 4px; }
+    .stat-val { font-size: 18px; font-weight: 900; }
   </style>
 </head>
 <body>
 
 <div class="app-screen">
-  <!-- TOP HEADER -->
+  <!-- HEADER -->
   <header class="top-header">
     <div>
       <div class="brand-title">Ehliyet<span>Cepte</span></div>
-      <div style="font-size: 10px; color: #e0f2fe; font-weight: 600;">2026 Çıkmış Sınav Soruları</div>
+      <div style="font-size: 10px; color: #e0f2fe; font-weight: 600;">2026 MEB Soru Havuzu (100 Soru)</div>
     </div>
     <div class="timer-badge">
       ⏱️ <span id="timerText">45:00</span>
@@ -247,23 +285,35 @@
 
   <!-- CATEGORY TABS -->
   <div class="category-scroll">
-    <button class="cat-btn active" onclick="switchCategory('all', this)">🏆 Deneme Sınavı</button>
-    <button class="cat-btn" onclick="switchCategory('ilkyardim', this)">🩹 İlk Yardım</button>
-    <button class="cat-btn" onclick="switchCategory('trafik', this)">🚦 Trafik</button>
-    <button class="cat-btn" onclick="switchCategory('motor', this)">⚙️ Motor</button>
-    <button class="cat-btn" onclick="switchCategory('adab', this)">🤝 Trafik Adabı</button>
+    <button class="cat-btn active" onclick="switchCategory('deneme1', this)">🏆 Deneme 1 (50 Soru)</button>
+    <button class="cat-btn" onclick="switchCategory('deneme2', this)">🎯 Deneme 2 (50 Soru)</button>
+    <button class="cat-btn" onclick="switchCategory('ilkyardim', this)">🩺 İlk Yardım (29)</button>
+    <button class="cat-btn" onclick="switchCategory('trafik', this)">🚦 Trafik & Çevre (36)</button>
+    <button class="cat-btn" onclick="switchCategory('motor', this)">⚙️ Motor & Araç (21)</button>
+    <button class="cat-btn" onclick="switchCategory('adab', this)">🤝 Trafik Adabı (14)</button>
+    <button class="cat-btn" onclick="switchCategory('all', this)">⭐ Tüm Sorular (100)</button>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progressFill"></div>
   </div>
 
   <!-- EXAM AREA -->
   <main class="exam-area">
     <div class="question-card" id="qCard">
       <div class="q-meta">
-        <span class="q-cat-tag" id="qCatTag">Kategori</span>
-        <span class="q-number" id="qIndex">Soru 1/10</span>
+        <span class="q-cat-tag" id="qCatTag">İlk Yardım</span>
+        <span class="q-number" id="qIndex">Soru 1/50</span>
       </div>
       <div class="q-text" id="qText">Soru yükleniyor...</div>
       <div class="options-list" id="qOptions">
         <!-- Seçenekler A, B, C, D -->
+      </div>
+      
+      <!-- EXPLANATION -->
+      <div class="explanation-card" id="qExpCard">
+        <strong>💡 MEB Çözüm Açıklaması:</strong>
+        <div id="qExpText" style="margin-top: 4px;"></div>
       </div>
     </div>
 
@@ -271,34 +321,34 @@
     <div class="nav-actions">
       <button class="btn-nav btn-prev" onclick="prevQuestion()">◀ Önceki</button>
       <button class="btn-nav btn-next" id="nextBtn" onclick="nextQuestion()">Sonraki ▶</button>
-      <button class="btn-nav btn-finish" id="finishBtn" onclick="finishExam()" style="display:none;">🏁 Sınavı Bitir</button>
+      <button class="btn-nav btn-finish" id="finishBtn" style="display: none;" onclick="finishExam()">Sınavı Bitir 🏁</button>
     </div>
   </main>
 
-  <!-- ADMOB SMART BANNER -->
+  <!-- ADMOB SMART BANNER SIMULATOR -->
   <div class="admob-banner">
-    <span style="font-size: 9px; background: #94a3b8; color: #fff; padding: 2px 5px; border-radius: 3px; font-weight: 800;">ADMOB REKLAM</span>
+    <span class="admob-tag">ADMOB REKLAM</span>
     <span style="font-size: 11px; font-weight: 700; color: #475569;">Google AdMob Akıllı Banner Alanı (320x50)</span>
-    <span style="font-size: 10px; color: #10b981; font-weight:700;">● Aktif</span>
+    <span style="font-size: 10px; color: #94a3b8;">Yayında</span>
   </div>
 </div>
 
-<!-- RESULT MODAL -->
-<div id="scoreModal" class="score-modal">
+<!-- SCORE RESULT MODAL -->
+<div class="score-modal" id="scoreModal">
   <div class="score-card">
-    <div class="score-icon" id="scoreIcon">🏆</div>
-    <div class="score-badge" id="scoreBadge">BAŞARILI GEÇTİNİZ</div>
-    <div class="score-val" id="scoreVal">80 Puan</div>
-    <div style="font-size: 12px; color: #64748b;">(Geçme notu en az 70 puandır)</div>
+    <div class="score-icon" id="scoreIcon">🎉</div>
+    <div class="score-title">Sınav Tamamlandı!</div>
+    <div class="score-val" id="scoreVal">84 Puan</div>
+    <div class="score-badge badge-passed" id="scoreBadge">TEBRİKLER! SINAVI GEÇTİNİZ</div>
 
-    <div class="score-stats">
+    <div class="stats-grid">
       <div>
         <div class="stat-label">Doğru</div>
-        <div class="stat-val" style="color: #10b981;" id="statCorrect">8</div>
+        <div class="stat-val" style="color: #10b981;" id="statCorrect">42</div>
       </div>
       <div>
         <div class="stat-label">Yanlış</div>
-        <div class="stat-val" style="color: #ef4444;" id="statWrong">2</div>
+        <div class="stat-val" style="color: #ef4444;" id="statWrong">8</div>
       </div>
       <div>
         <div class="stat-label">Boş</div>
@@ -313,18 +363,25 @@
 </div>
 
 <script>
-  let questions = [];
+  const ALL_QUESTIONS = [{"id": 1, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Aşağıdakilerden hangisi kaza sonuçlarının ağırlaşmasını önlemek için olay yerinin değerlendirilmesi işlemini kapsar?", "options": {"A": "Koruma", "B": "Bildirme", "C": "Kurtarma", "D": "Tedavi etme"}, "answer": "A", "explanation": "İlk yardımın temel uygulamaları Koruma, Bildirme ve Kurtarma (KBK)'dır. Olay yerinin güvenliğinin sağlanması 'Koruma' basamağıdır."}, {"id": 2, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Yetişkinlerde temel yaşam desteği uygulanırken yapılan kalp masajında göğüs kemiği kaç cm aşağı inecek şekilde baskı uygulanır?", "options": {"A": "2 cm", "B": "3 cm", "C": "5 cm", "D": "7 cm"}, "answer": "C", "explanation": "Yetişkinlerde ve çocuklarda göğüs kemiği 5 cm, bebeklerde ise 4 cm çökecek şekilde baskı uygulanır."}, {"id": 3, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Solunum yolu tam tıkanmış bir kazazedede aşağıdaki belirtilerden hangisi görülür?", "options": {"A": "Rahatça konuşabilir", "B": "Öksürebilir", "C": "Nefes alabilir", "D": "Ellerini boynuna götürür, acı çeker ve morarır"}, "answer": "D", "explanation": "Tam tıkanmada Heimlich manevrası uygulanır. Belirtisi konuşamama, nefes alamama, elleri boyna götürme ve morarmadır."}, {"id": 4, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kaza geçirmiş yaralıda solunum ve kalp durması varsa, aşağıdakilerden hangisi ilk olarak yapılmalıdır?", "options": {"A": "Hemen suni solunum ve kalp masajına başlanmalıdır", "B": "Yaralıya su içirilmelidir", "C": "Yaralı yürütülmeye çalışılmalıdır", "D": "Yaralı sıcak tutulup beklenmelidir"}, "answer": "A", "explanation": "Kalp ve solunum durmasında beyin ölümünü engellemek için vakit kaybetmeden Temel Yaşam Desteğine (kalp masajı ve suni solunum) başlanmalıdır."}, {"id": 5, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Araçtan yaralı çıkarılırken omurilik zedelenmesini önlemek için uygulanan manevra hangisidir?", "options": {"A": "Heimlich manevrası", "B": "Rentek manevrası", "C": "İtfaiyeci yöntemi", "D": "Şok pozisyonu"}, "answer": "B", "explanation": "Araç içindeki yaralının omuriliğine zarar vermeden, boyun-sırt-bel eksenini koruyarak çıkarmak için 'Rentek Manevrası' kullanılır."}, {"id": 6, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Turnike (boğucu sargı) uygulaması hangi durumlarda tercih edilmelidir?", "options": {"A": "Hafif sıyrıklarda", "B": "Tüm kanamalarda", "C": "Uzuv kopması olan veya baskı noktalarıyla durdurulamayan büyük kanamalarda", "D": "Burun kanamalarında"}, "answer": "C", "explanation": "Turnike yalnızca baskıyla durdurulamayan çok şiddetli arteriyel kanamalarda veya uzuv kopmalarında son çare olarak uygulanır."}, {"id": 7, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Şok pozisyonunda yaralının bacakları kaç cm yukarı kaldırılır?", "options": {"A": "15 cm", "B": "30 cm", "C": "45 cm", "D": "60 cm"}, "answer": "B", "explanation": "Şok pozisyonunda beyne kan akışını sağlamak amacıyla yaralı sırtüstü yatırılır ve bacakları yaklaşık 30 cm yukarı kaldırılır."}, {"id": 8, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Koma pozisyonu (yarı yüzükoyun yan pozisyon) hangi durumdaki yaralılara verilir?", "options": {"A": "Bilinci açık olanlara", "B": "Kalbi durmuş olanlara", "C": "Bilinci kapalı ancak solunumu ve nabzı olanlara", "D": "Bacaklarında kırık olanlara"}, "answer": "C", "explanation": "Bilinci kapalı fakat solunumu devam eden kazazedelerde dilin geriye kaçıp hava yolunu tıkamasını ve kusmuk aspirasyonunu önlemek için koma pozisyonu verilir."}, {"id": 9, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Burun kanaması olan bir kazazedeye aşağıdaki ilk yardım uygulamalarından hangisi yapılmalıdır?", "options": {"A": "Başı geriye doğru yaslanmalıdır", "B": "Baş hafifçe öne eğilip burun kanatları 5 dakika sıkılmalıdır", "C": "Sırtüstü yatırılmalıdır", "D": "Burnuna sıcak su çekilmelidir"}, "answer": "B", "explanation": "Burun kanamasında kanın yutulmaması ve akciğere kaçmaması için baş öne eğilir ve burun kanatları parmaklarla sıkıştırılır."}, {"id": 10, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Açık göğüs yaralanmalarında yaralının oturur pozisyona getirilmesinin temel sebebi nedir?", "options": {"A": "Daha rahat solunum yapabilmesini sağlamak", "B": "Ağrısını tamamen dindirmek", "C": "Uyumasını engellemek", "D": "Görmesini kolaylaştırmak"}, "answer": "A", "explanation": "Göğüs yaralanmalarında akciğerlerin rahat genişleyebilmesi ve solunum güçlüğünün azaltılması için yaralı yarı oturur pozisyona getirilir."}, {"id": 11, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kalp durmasının en önemli ve kesin belirtisi aşağıdakilerden hangisidir?", "options": {"A": "Göz bebeklerinin küçülmesi", "B": "Büyük arterlerden nabız alınamaması", "C": "Vücut sıcaklığının yükselmesi", "D": "Cildin kızarması"}, "answer": "B", "explanation": "Şah damarından (karotis arter) en az 10 saniye süreyle nabız alınamaması kalp durmasının kesin kanıtıdır."}, {"id": 12, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Temel Yaşam Desteğinde kalp masajı ve suni solunum oranı (yetişkinlerde) kaçtır?", "options": {"A": "15 kalp masajı - 1 solunum", "B": "30 kalp masajı - 2 suni solunum", "C": "20 kalp masajı - 2 solunum", "D": "10 kalp masajı - 1 solunum"}, "answer": "B", "explanation": "Uluslararası standartlara göre temel yaşam desteği döngüsü 30 göğüs basısı ve 2 kurtarıcı nefes (30:2) şeklindedir."}, {"id": 13, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Bayılan bir kazazedenin kusması varsa hangi pozisyona getirilmelidir?", "options": {"A": "Sırtüstü pozisyon", "B": "Yan yatış (koma) pozisyonu", "C": "Ayakta tutma", "D": "Baş aşağı pozisyon"}, "answer": "B", "explanation": "Kusan veya kusma riski olan bilinci kapalı yaralılar nefes borusuna kusmuk kaçmaması için yan yatış pozisyonuna alınır."}, {"id": 14, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kimyasal madde yanıklarında olay yerinde yapılacak ilk işlem hangisidir?", "options": {"A": "Yara üzerine merhem sürmek", "B": "Yanan bölgeyi bol tazyiksiz suyla en az 15-20 dakika yıkamak", "C": "Bölgeyi bandajla sıkıca sarmak", "D": "Alkol dökmek"}, "answer": "B", "explanation": "Kimyasal maddelerin ciltten uzaklaştırılması için hemen bol akan su ile 15-20 dakika yıkanması gerekir."}, {"id": 15, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kırık şüphesi olan bir uzvun sabitlenmesinde (atel uygulamasında) kural nedir?", "options": {"A": "Sadece kırık olan bölge sarılır", "B": "Kırık kemiğin altındaki ve üstündeki eklemler de hareketsiz kılınmalıdır", "C": "Kemik yerine oturtulmaya çalışılır", "D": "Uzuv bükülerek bağlanır"}, "answer": "B", "explanation": "Kırık tespitinde kırık bölgesinin hem üstündeki hem de altındaki eklemler birlikte hareketsiz hale getirilmelidir."}, {"id": 16, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aksine bir işaret yoksa yerleşim yeri dışındaki şehirlerarası çift yönlü karayollarında otomobiller için azami hız sınırı saatte kaç kilometredir?", "options": {"A": "70 km/s", "B": "80 km/s", "C": "90 km/s", "D": "110 km/s"}, "answer": "C", "explanation": "Otomobiller için şehirlerarası çift yönlü karayollarında azami hız sınırı 90 km/s, bölünmüş yollarda 110 km/s'dir."}, {"id": 17, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Bölünmüş karayollarında otomobiller için azami hız sınırı saatte kaç kilometredir?", "options": {"A": "90 km/s", "B": "100 km/s", "C": "110 km/s", "D": "130 km/s"}, "answer": "C", "explanation": "Karayolları Trafik Yönetmeliğine göre otomobiller için bölünmüş yollarda hız sınırı 110 km/s'dir."}, {"id": 18, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Otoyollarda (otoban) otomobiller için yeni düzenlemeye göre azami hız sınırı saatte kaç kilometredir?", "options": {"A": "110 km/s", "B": "120 km/s", "C": "130 - 140 km/s", "D": "150 km/s"}, "answer": "C", "explanation": "Karayolları Genel Müdürlüğü ve KGM otoyollarında azami hız 130 km/s, YİD (yap-işlet-devret) otoyollarında ise 140 km/s'dir."}, {"id": 19, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Takip mesafesi kuralı gereğince 90 km/s hızla giden bir aracın öndeki araçla arasındaki mesafe en az kaç metre olmalıdır?", "options": {"A": "30 metre", "B": "45 metre", "C": "60 metre", "D": "90 metre"}, "answer": "B", "explanation": "Takip mesafesi kural olarak hızın yarısı kadardır (metre cinsinden). 90 km/s hız için en az 45 metre mesafe bırakılmalıdır."}, {"id": 20, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aşağıdakilerden hangisi geçiş üstünlüğüne sahip araçların sıralamasında İLK sırada yer alır?", "options": {"A": "İtfaiye araçları", "B": "Ambulans (cankurtaran)", "C": "Polis / Zabıta araçları", "D": "Kar küreme araçları"}, "answer": "B", "explanation": "Geçiş üstünlüğü sıralaması: 1. Cankurtaran (Ambulans), 2. İtfaiye, 3. Güvenlik/Polis, 4. Afet ve yol araçları şeklindedir."}, {"id": 21, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Kavşaklarda geçiş hakkı kurallarına göre, döner kavşak içindeki araç ile kavşağa girmek üzere olan araç karşılaştığında geçiş hakkı kime aittir?", "options": {"A": "Döner kavşağa girmek üzere olan araca", "B": "Döner kavşak içindeki araca", "C": "Büyük olan araca", "D": "Hızlı gelen araca"}, "answer": "B", "explanation": "Döner kavşaklarda kural: Döner kavşak içindeki araçların geçiş üstünlüğü vardır. Kavşağa giren sürücüler yol vermelidir."}, {"id": 22, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Sağa dönüş yapmak isteyen bir sürücü aşağıdaki kurallardan hangisine uymalıdır?", "options": {"A": "Dönüşe başlamadan önce geniş kavisle dönmelidir", "B": "Dönüşe başlamadan önce dar kavisle dönmelidir", "C": "En sol şeride geçmelidir", "D": "Sinyal vermesine gerek yoktur"}, "answer": "B", "explanation": "Trafik kurallarına göre: Sağa dönüşler DAR kavisle, sola dönüşler GENİŞ kavisle yapılır."}, {"id": 23, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aşağıdakilerden hangisi trafik kazalarında ASLİ KUSUR sayılan hallerdendir?", "options": {"A": "Hız sınırını 10 km aşmak", "B": "Kırmızı ışıkta veya yetkili memurun dur işaretinde geçmek", "C": "Araçta yangın tüpü bulundurmamak", "D": "Aracın muayenesini geciktirmek"}, "answer": "B", "explanation": "Kırmızı ışıkta geçmek, arkadan çarpmak, geçme yasağı olan yerde sollamak ve ters yöne girmek ASLİ KUSUR hallerindendir."}, {"id": 24, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Hususi (bireysel) otomobil sürücüleri için yasal alkol promil sınırı kaçtır?", "options": {"A": "0.20 promil", "B": "0.50 promil", "C": "0.80 promil", "D": "1.00 promil"}, "answer": "B", "explanation": "Hususi otomobil sürücüleri için yasal sınır 0.50 promildir. Ticari araç ve resmi araç sürücüleri için sınır 0.00 promildir."}, {"id": 25, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Trafik polisi bir kolunu yukarı kaldırdığında bu işaret ne anlama gelir?", "options": {"A": "Hızlan işareti", "B": "Bütün yönler için DUR işareti", "C": "Yalnızca arkadaki araçlar için dur işareti", "D": "Yolun açık olduğu işareti"}, "answer": "B", "explanation": "Trafik polisinin tek kolunu havaya kaldırması kavşaktaki bütün istikametler için 'DUR' anlamına gelir."}, {"id": 26, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Karayolunda bozulup kalan bir aracın önüne ve arkasına şehir içinde en az kaç metre mesafeye reflektör konulmalıdır?", "options": {"A": "15 metre", "B": "30 metre", "C": "50 metre", "D": "150 metre"}, "answer": "B", "explanation": "Arızalanan aracın önüne ve arkasına şehir içinde en az 30 metre, diğer sürücülerin 150 metreden görebileceği mesafeye yansıtıcı konur."}, {"id": 27, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Trafik kazasında yaralanan kişinin hayati tehlikesi yoksa sürücü ne yapmalıdır?", "options": {"A": "Olay yerinden uzaklaşmalıdır", "B": "Trafiği açmak için araçları kaldırmalıdır", "C": "Olay yerini korumalı ve durumu derhal 112 Acil Çağrı Merkezine bildirmelidir", "D": "Sadece sigorta şirketini aramalıdır"}, "answer": "C", "explanation": "Kazaya karışan sürücüler kaza mahallinde durmak, trafiğin güvenliğini sağlamak ve 112'ye bildirmekle yükümlüdür."}, {"id": 28, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Bir kavşakta trafik lambası kırmızı yanarken aynı anda yeşil oklu ışık yanıyorsa sürücü ne yapabilir?", "options": {"A": "Düz gidebilir", "B": "Sadece oklu ışığın gösterdiği yöne dikkatle dönebilir", "C": "Hiçbir yöne dönemez", "D": "Geri gitmelidir"}, "answer": "B", "explanation": "Yeşil oklu ışık, o yönün trafiğe açık olduğunu bildirir. Sürücüler sadece oklu ışığın işaret ettiği istikamete dönüş yapabilir."}, {"id": 29, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aşağıdakilerden hangisi 'Öndeki Aracı Geçme Yasağı'nın uygulandığı yerlerden DEĞİLDİR?", "options": {"A": "Tepeler ve dönemeçler", "B": "Yaya ve okul geçitleri", "C": "Demiryolu (hemzemin) geçitleri", "D": "Bölünmüş yoldaki düz ve görüşü açık şeritler"}, "answer": "D", "explanation": "Görüşün açık olduğu düz bölünmüş yollarda sol şerit geçiş için kullanılır. Virajlarda, tepe üstlerinde ve geçitlerde geçiş yasaktır."}, {"id": 30, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Tehlikeli madde taşıyan araçlar, yerleşim birimleri dışındaki karayollarında diğer araçları en az kaç metre mesafeden takip etmelidir?", "options": {"A": "20 metre", "B": "35 metre", "C": "50 metre", "D": "70 metre"}, "answer": "C", "explanation": "Tehlikeli madde taşıyan araç sürücüleri hızları ne olursa olsun öndeki araçları en az 50 metre mesafeden takip etmek zorundadır."}, {"id": 31, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Dört zamanlı benzinli motorlarda silindire giren yakıt-hava karışımını tutuşturan parça hangisidir?", "options": {"A": "Enjektör", "B": "Buji", "C": "Distribütör", "D": "Karbüratör"}, "answer": "B", "explanation": "Benzinli motorlarda ateşleme buji kıvılcımı ile, dizel motorlarda ise sıkışan sıcak havanın üzerine enjektörle mazot püskürtülerek yapılır."}, {"id": 32, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Motor yağı kontrol edilirken yağ seviyesi yağ çubuğunun neresinde olmalıdır?", "options": {"A": "Alt çizginin altında", "B": "İki çizgi (Min - Max) arasında", "C": "Üst çizginin çok üstünde", "D": "Yağ çubuğunun en tepesinde"}, "answer": "B", "explanation": "Sağlıklı bir yağ seviyesi, motor düz bir zeminde ve stop edilmişken iki çizgi arasında olmalıdır."}, {"id": 33, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Seyir halindeyken gösterge panelinde 'Kırmızı Akü Şarj İkaz Işığı' yanarsa sürücü ne yapmalıdır?", "options": {"A": "Hızını artırmalıdır", "B": "Aracı derhal durdurup kontağı kapatmalıdır", "C": "Yola devam edip farları açmalıdır", "D": "Müziğin sesini açmalıdır"}, "answer": "B", "explanation": "Şarj lambası alternatörün elektrik üretmediğini veya şarj kayışının koptuğunu gösterir. Motor hararet yapabilir, derhal durdurulmalıdır."}, {"id": 34, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Radyatördeki soğutma suyunun donmasını önlemek için suya ne ilave edilir?", "options": {"A": "Motor yağı", "B": "Saf alkol", "C": "Antifriz", "D": "Fren hidroliği"}, "answer": "C", "explanation": "Antifriz, motor soğutma suyunun donma noktasını düşürerek kışın donmayı, yazın ise kaynamayı ve paslanmayı önler."}, {"id": 35, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Araç lastiklerinin hava basıncı tavsiye edilenden daha az (düşük) olursa ne meydana gelir?", "options": {"A": "Lastiklerin orta kısmı aşınır", "B": "Lastiklerin yanak kısımları aşınır ve yakıt tüketimi artar", "C": "Araç daha az yakıt yakar", "D": "Fren mesafesi kısalır"}, "answer": "B", "explanation": "Düşük hava basıncında lastiğin omuz (kenar) kısımları aşınır, sürtünme artar ve yakıt tüketimi yükselir."}, {"id": 36, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Seyir esnasında motor hararet göstergesi aniden yükselirse ilk olarak ne yapılmalıdır?", "options": {"A": "Radyatör kapağı hemen açılmalıdır", "B": "Araç uygun bir yerde durdurulup motor rölantide çalıştırılmalı ve kontrol edilmelidir", "C": "Hemen gaza basılmalıdır", "D": "Radyatöre soğuk su dökülmelidir"}, "answer": "B", "explanation": "Hararet yapan araçta motor hemen stop edilmez, rölantide çalıştırılarak sıcaklığın düşmesi beklenir. Kapak sıcakken asla açılmaz."}, {"id": 37, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Fren pedalına basıldığında fren lambaları yanmıyorsa arıza aşağıdakilerden hangisindedir?", "options": {"A": "Fren müşirinde", "B": "Distribütörde", "C": "Karbüratörde", "D": "Marş motorunda"}, "answer": "A", "explanation": "Fren pedalına basıldığında lambaların yanmasını sağlayan elektrik anahtarı 'fren müşiri'dir."}, {"id": 38, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Araçta yakıt tasarrufu sağlamak için aşağıdakilerden hangisi yapılmalıdır?", "options": {"A": "Trafik yoğun saatlerde ani hızlanma ve sert frenler yapmak", "B": "Eskiyen buji ve hava filtrelerini zamanında değiştirmek", "C": "Klimayı sürekli maksimumda çalıştırmak", "D": "Düşük viteste yüksek hızla gitmek"}, "answer": "B", "explanation": "Temiz hava filtresi ve sağlam bujiler yakıtın tam yanmasını sağlayarak yakıt sarfiyatını düşürür."}, {"id": 39, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Kışın araç camlarının buğulanmasını önlemek için havalandırma sistemi hangi konuma getirilmelidir?", "options": {"A": "İç sirkülasyon açık konuma", "B": "Ön cam üfleme (defrost) ve dış hava giriş konumuna", "C": "Ayaklara üfleme konumuna", "D": "Tamamen kapatılmalıdır"}, "answer": "B", "explanation": "Dışarıdan gelen taze hava ve ön cama yönlendirilen klima/ısıtıcı hava nemi kurutarak buğuyu anında yok eder."}, {"id": 40, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Araç hareket halindeyken el freni çekilirse ne olur?", "options": {"A": "Araç anında güvenle durur", "B": "Arka tekerlekler kilitlenir ve araç savrulup takla atabilir", "C": "Ön tekerlekler kilitlenir", "D": "Motor stop eder"}, "answer": "B", "explanation": "El freni arka tekerleklere etki eder. Yüksek hızda çekilirse arka tekerler kilitlenip aracın savrulmasına neden olur."}, {"id": 41, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte karşılaşılan olumsuz durumlarda öfkelenmek yerine sakin kalabilme ve sabır gösterme becerisi aşağıdakilerden hangisidir?", "options": {"A": "Saldırganlık", "B": "Beden dili", "C": "Öfke yönetimi ve sabır", "D": "Bencillik"}, "answer": "C", "explanation": "Trafik adabının temeli sabır, hoşgörü ve öfkeyi kontrol altına alabilmektir."}, {"id": 42, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte bir sürücünün başka bir sürücünün hakkını gözeterek ona yol vermesi hangi kavramla ifade edilir?", "options": {"A": "Diğergamlık (özgecilik) ve nezaket", "B": "İnatlaşma", "C": "Hak gaspı", "D": "Sabırsızlık"}, "answer": "A", "explanation": "Başkalarının güvenliğini ve hakkını kendi çıkarının önünde tutmaya 'diğergamlık' denir."}, {"id": 43, "category": "adab", "category_title": "Trafik Adabı", "question": "Yağmurlu bir günde kaldırımdaki yayaların üzerine su sıçratmamak için yavaşlayan bir sürücünün davranışı hangisine örnektir?", "options": {"A": "Saygısızlığa", "B": "Empati ve toplumsal sorumluluğa", "C": "Hırs yapmaya", "D": "Kural tanımazlığa"}, "answer": "B", "explanation": "Yayaların durumunu anlayıp ona göre hız kesmek empati ve medeni sürücü davranışıdır."}, {"id": 44, "category": "adab", "category_title": "Trafik Adabı", "question": "Kırmızı ışıkta beklerken yeşil yandığı anda önündeki sürücüye sabır göstermeyip hemen kornaya basmak hangisini gösterir?", "options": {"A": "Trafik kültürünün yüksek olduğunu", "B": "Sabırsızlık ve tahammülsüzlük", "C": "Hızlı araç kullanma yeteneğini", "D": "Dikkatli bir sürücü olduğunu"}, "answer": "B", "explanation": "Işık yeşile döner dönmez kornaya basmak gürültü kirliliğine, strese ve panik kaynaklı kazalara yol açar."}, {"id": 45, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte sürücülerin birbirleriyle iletişim kurarken kaba ve tehditkar el-kol hareketleri yapması neye yol açar?", "options": {"A": "Trafik akışının hızlanmasına", "B": "Gerginliğin tırmanmasına ve kazalara", "C": "Sürücülerin rahatlamasına", "D": "Güvenli sürüş ortamına"}, "answer": "B", "explanation": "Saldırgan beden dili karşı tarafı kışkırtır, dikkat dağıtır ve kaza riskini artırır."}, {"id": 46, "category": "adab", "category_title": "Trafik Adabı", "question": "Ambulans siren çalarak arkadan yaklaşırken fermuar sistemiyle (sağa ve sola açılarak) yol açmak neyin göstergesidir?", "options": {"A": "Korkunun", "B": "Yüksek trafik bilinci ve yardımlaşmanın", "C": "Acemiliğin", "D": "Yol hakkını bilmemenin"}, "answer": "B", "explanation": "Fermuar sistemiyle acil durum koridoru açmak hayat kurtaran bir trafik kültürü örneğidir."}, {"id": 47, "category": "adab", "category_title": "Trafik Adabı", "question": "Engelli vatandaşlarımız için ayrılmış park yerlerine engeli olmayan bir sürücünün park etmesi hangi hakkın ihlalidir?", "options": {"A": "Sadece kamu hakkının", "B": "Birey ve kul hakkının", "C": "Çevre hakkının", "D": "Hiçbir hakkın ihlali değildir"}, "answer": "B", "explanation": "Engelli park yerine park etmek, engelli bireyin yaşamını doğrudan kısıtlayan ağır bir hak ihlalidir."}, {"id": 48, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte yapılan bir hatadan sonra diğer sürücüden el işareti veya tebessümle özür dilemek ne sağlar?", "options": {"A": "Zayıflık göstergesidir", "B": "Olası tartışmaları önler ve ortamı yumuşatır", "C": "Hatanın cezasını artırır", "D": "Trafiği kilitler"}, "answer": "B", "explanation": "Nezaket ve özür dilemek öfkeyi söndüren en etkili trafik adabı unsurudur."}, {"id": 49, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Bebeklerde (0-1 yaş) bilinç kontrolü nasıl yapılır?", "options": {"A": "Omuzlarına dokunularak seslenilir", "B": "Ayak tabanına hafifçe vurularak", "C": "Gözlerine ışık tutularak", "D": "Kulağı çekilerek"}, "answer": "B", "explanation": "Bebeklerde bilinç durumu ayak tabanına hafifçe vurularak tepki verip vermediğiyle kontrol edilir."}, {"id": 50, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Karlı ve buzlu havalarda araç kullanırken takip mesafesi normal hava şartlarına göre nasıl ayarlanmalıdır?", "options": {"A": "Daha da azaltılmalıdır", "B": "Aynı bırakılmalıdır", "C": "Normalin en az iki katı kadar artırılmalıdır", "D": "Öndeki araca yanaşılmalıdır"}, "answer": "C", "explanation": "Kaygan zeminlerde fren mesafesi katbekat uzayacağı için takip mesafesi en az iki katına çıkarılmalıdır."}, {"id": 51, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kanamanın ciddiyeti aşağıdakilerden hangisine bağlı DEĞİLDİR?", "options": {"A": "Kanamanın hızına", "B": "Vücutta aktığı bölgeye", "C": "Kan grubuna", "D": "Kaybedilen kan miktarına"}, "answer": "C", "explanation": "Kanamanın tehlikesi hızına, miktarına ve yerine bağlıdır; kişinin kan grubu kanamanın ciddiyetini etkilemez."}, {"id": 52, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Atardamar (arter) kanamalarının ayırt edici özelliği nedir?", "options": {"A": "Koyu renkli ve sızıntı şeklinde akması", "B": "Açık kırmızı renkli ve kalp atımlarıyla uyumlu fışkırır tarzda akması", "C": "Kahverengi ve köpüklü olması", "D": "Çok yavaş akması"}, "answer": "B", "explanation": "Atardamar temiz kan taşır; açık kırmızıdır ve yüksek basınç nedeniyle fışkırarak akar. En tehlikeli kanamadır."}, {"id": 53, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Toplardamar kanamasının temel özelliği aşağıdakilerden hangisidir?", "options": {"A": "Açık renkli ve fışkırıcı olması", "B": "Koyu kırmızı renkli ve sürekli sızıntı/yayılma şeklinde akması", "C": "Köpüklü olması", "D": "Nabızla uyumlu akması"}, "answer": "B", "explanation": "Toplardamar kirli kan taşır; koyu renklidir ve basıncı düşük olduğu için fışkırmaz, yayılarak akar."}, {"id": 54, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Zehirlenmelerde kazazedenin bilinci kapalıysa ve solunumu varsa hangi pozisyon verilir?", "options": {"A": "Sırtüstü pozisyon", "B": "Koma (yarı yüzükoyun yan) pozisyonu", "C": "Ayakta tutma", "D": "Baş aşağı sallama"}, "answer": "B", "explanation": "Kusma ve solunum yolunun kapanmasını engellemek için koma pozisyonu verilir."}, {"id": 55, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kırık olan kemiğin uçlarının deri dışına çıkarak görünür hale gelmesine ne ad verilir?", "options": {"A": "Kapalı kırık", "B": "Açık kırık", "C": "Çıkık", "D": "Burkulma"}, "answer": "B", "explanation": "Kemik uçlarının deriyi yırtıp dışarı çıktığı kırıklara 'açık kırık' denir; enfeksiyon riski çok yüksektir."}, {"id": 56, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Işıklı trafik işaret cihazında sarı ışık kırmızı ışıktan sonra yandığında sürücü ne yapmalıdır?", "options": {"A": "Hemen durmalıdır", "B": "Yolun trafiğe açılacağını anlayıp kalkışa hazırlanmalıdır", "C": "Geri vitese takmalıdır", "D": "Kornaya basmalıdır"}, "answer": "B", "explanation": "Kırmızıdan sonra yanan sarı ışık, yeşilin geleceğini ve yolun trafiğe açılacağını bildirir."}, {"id": 57, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Trafik işaret levhalarında 'Üçgen' şeklindeki levhaların genel amacı nedir?", "options": {"A": "Sürücülere yasaklama bildirmek", "B": "Tehlikeyi ve yol koşullarını önceden bildirmek (Tehlike Uyarı)", "C": "Mesafe ve yön bilgisi vermek", "D": "Durmayı emretmek"}, "answer": "B", "explanation": "Üçgen levhalar 'Tehlike Uyarı İşaretleri'dir; sürücüyü ilerdeki viraj, yol çalışması, kasis gibi tehlikelere karşı uyarır."}, {"id": 58, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "'Daire' (yuvarlak) şeklindeki trafik levhalarının genel anlamı nedir?", "options": {"A": "Trafik Tanzim (Yasaklama ve Kısıtlama)", "B": "Trafik Bilgi", "C": "Tehlike Uyarı", "D": "Durak yeri"}, "answer": "A", "explanation": "Yuvarlak daire şeklindeki levhalar kuralları, yasaklamaları (Örn: Giriş yasak, Hız sınırı, Sollama yasağı) bildirir."}, {"id": 59, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Kare veya dikdörtgen şeklindeki trafik levhaları genellikle ne amaçla kullanılır?", "options": {"A": "Yasaklama", "B": "Bilgi verme (Hastane, otopark, yön vb.)", "C": "Tehlike uyarısı", "D": "Ceza kesme"}, "answer": "B", "explanation": "Dikdörtgen ve kare levhalar 'Trafik Bilgi İşaretleri'dir."}, {"id": 60, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Sisli, karlı veya şiddetli yağmurlu havalarda hangi farlar yakılmalıdır?", "options": {"A": "Uzun hüzmeli farlar", "B": "Sis farları ve kısa hüzmeli farlar", "C": "Sadece dörtlü flaşörler", "D": "Farlar tamamen kapatılmalıdır"}, "answer": "B", "explanation": "Siste uzun farlar yakılırsa ışık su damlacıklarına çarpıp sürücünün gözünü kamaştırır (beyaz duvar etkisi). Kısa farlar ve sis farı yakılmalıdır."}, {"id": 61, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Motorun hararet yapmasının sebeplerinden biri aşağıdakilerden hangisidir?", "options": {"A": "Lastik havasının fazla olması", "B": "Vantilatör kayışının kopması veya gevşek olması", "C": "Fren balatalarının yeni olması", "D": "Cam suyunun bitmesi"}, "answer": "B", "explanation": "Vantilatör kayışı su pompasını (devirdaim) çevirir. Koparsa su devirdaim yapamaz ve motor anında hararet yapar."}, {"id": 62, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Araca yakıt ikmali yapılırken uyulması gereken en önemli kural nedir?", "options": {"A": "Motor çalışır vaziyette tutulmalıdır", "B": "Motor stop edilmeli, sigara içilmemeli ve kıvılcım kaynakları uzak tutulmalıdır", "C": "Farlar açık bırakılmalıdır", "D": "Gaza hafifçe basılmalıdır"}, "answer": "B", "explanation": "Yakıt istasyonunda yangın riskine karşı motor stop edilir, sigara ve cep telefonu gibi kıvılcım kaynakları engellenir."}, {"id": 63, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Dizel motorlu araçların yakıt filtresinde biriken su tahliye edilmezse ne olur?", "options": {"A": "Motorun gücü artar", "B": "Enjektörler ve yakıt pompası paslanıp arızalanır", "C": "Yakıt tüketimi yarı yarıya düşer", "D": "Akü şarj olmaz"}, "answer": "B", "explanation": "Mazot içindeki su yüksek basınçlı mazot pompasını ve hassas enjektörleri aşındırıp bozar."}, {"id": 64, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte arkadaki aracın selektör yaparak sürekli taciz etmesi durumunda sürücünün yapması gereken en doğru davranış nedir?", "options": {"A": "Gaza basıp yarışmak", "B": "Aniden sert fren yapmak", "C": "Sakin kalarak uygun ilk fırsatta sağ şeride geçip yol vermek", "D": "Kornaya basarak küfretmek"}, "answer": "C", "explanation": "Agresif sürücülerle inatlaşmak ölümcül kazalara yol açar; güvenli şekilde yol verip uzaklaşmak en doğrusudur."}, {"id": 65, "category": "adab", "category_title": "Trafik Adabı", "question": "Hangi sürücü davranışı trafikte güvenliği artırır ve stresi azaltır?", "options": {"A": "Trafik kurallarına saygı duymak ve diğer sürücülere hoşgörülü yaklaşmak", "B": "Sürekli şerit ihlali yapmak (makas atmak)", "C": "Diğer araçların önüne kırmak", "D": "Gereksiz korna çalmak"}, "answer": "A", "explanation": "Kurallara riayet ve hoşgörü trafik ortamını huzurlu ve güvenli kılar."}, {"id": 66, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "İlk yardımda ABC değerlendirmesinde \"A\" harfi neyi ifade eder?", "options": {"A": "Hava yolu açıklığının sağlanması (Airway)", "B": "Solunumun değerlendirilmesi (Breathing)", "C": "Dolaşımın değerlendirilmesi (Circulation)", "D": "Ateş ölçümü"}, "answer": "A", "explanation": "İlk yardımın ABC'si: A- Hava yolu açıklığı, B- Solunum değerlendirmesi (Bak-Dinle-Hisset), C- Dolaşım (şah damarından nabız) kontrolüdür."}, {"id": 67, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "İlk yardımın ABC değerlendirmesinde \"B\" harfi neyi ifade eder?", "options": {"A": "Solunumun değerlendirilmesi (Bak-Dinle-Hisset)", "B": "Bacakların kaldırılması", "C": "Bilinç kontrolü", "D": "Bandaj yapılması"}, "answer": "A", "explanation": "B (Breathing), solunumun 10 saniye süreyle Bak-Dinle-Hisset yöntemiyle kontrol edilmesidir."}, {"id": 68, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Kazazedenin bilincini kontrol etmek için ilk yardımcı ne yapmalıdır?", "options": {"A": "Yavaşça omuzlarına dokunup \"İyi misiniz?\" diye seslenmelidir", "B": "Sertçe tokat atmalıdır", "C": "Hemen su dökmelidir", "D": "Kollarından tutup kaldırmalıdır"}, "answer": "A", "explanation": "Bilinç kontrolünde yetişkinlerde omzuna hafifçe dokunarak sözel uyarı verilir."}, {"id": 69, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Omurga (boyun-sırt-bel) yaralanmalarında yanlış taşıma ve müdahale neye yol açabilir?", "options": {"A": "Geçici baş ağrısına", "B": "Kalıcı felç veya ölüme", "C": "Mide bulantısına", "D": "Grip oluşmasına"}, "answer": "B", "explanation": "Omurilik sinirleri zedelenirse vücudun alt kısımlarında kalıcı felç veya solunum merkezi etkilenirse ölüm gerçekleşir."}, {"id": 70, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Donma tehlikesi geçiren bir kişiye aşağıdakilerden hangisi KESİNLİKLE YAPILMAMALIDIR?", "options": {"A": "Ilık içecekler verilmesi", "B": "Donan bölgelerin karla veya sertçe ovulması", "C": "Kuru ve ılık giysiler giydirilmesi", "D": "Sıcak ve rüzgarsız ortama alınması"}, "answer": "B", "explanation": "Donan dokularda buz kristalleri hücreleri parçalar; karla veya sertçe ovmak doku ölümüne (kangren) yol açar."}, {"id": 71, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Trafik kazasında yaralanan veya ölen kişilerin yakınlarına haber verme sorumluluğu kime aittir?", "options": {"A": "Kazaya karışan diğer sürücülere", "B": "Sağlık personeline", "C": "Trafik polisine veya yetkili zabıtaya", "D": "Yoldan geçen vatandaşlara"}, "answer": "C", "explanation": "Kaza mahallinde resmi zabıt tutan ve ailelere haber verme görevi kolluk kuvvetlerine (trafik polisi/jandarma) aittir."}, {"id": 72, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Bir aracın arkasındaki kırmızı renkli stop lambaları sürücü ne yaptığında yanar?", "options": {"A": "Gaza bastığında", "B": "Fren pedalına bastığında", "C": "Kornaya bastığında", "D": "Vites değiştirdiğinde"}, "answer": "B", "explanation": "Fren pedalına basıldığında arkadaki sürücüleri uyarmak için kırmızı stop lambaları yanar."}, {"id": 73, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Geri vites lambasının rengi aşağıdakilerden hangisidir?", "options": {"A": "Kırmızı", "B": "Sarı (Turuncu)", "C": "Beyaz", "D": "Mavi"}, "answer": "C", "explanation": "Geri vitese takıldığında arkadaki alanı aydınlatmak ve uyarmak için beyaz renkli geri vites lambaları yanar."}, {"id": 74, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Karayolunda sürücülerin emniyet kemeri takması ile ilgili kural nedir?", "options": {"A": "Sadece otoyollarda zorunludur", "B": "Tüm karayollarında sürücü ve yolcular için mecburidir", "C": "Sadece gece zorunludur", "D": "İsteğe bağlıdır"}, "answer": "B", "explanation": "Emniyet kemeri takmak şehir içi ve şehir dışı tüm karayollarında sürücü ve tüm yolcular için yasal zorunluluktur."}, {"id": 75, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Çocuk bağlama sistemleri (çocuk oto koltuğu) hangi ağırlık veya boyun altındaki çocuklarda zorunludur?", "options": {"A": "150 cm boy ve 36 kg altı", "B": "120 cm boy", "C": "50 kg", "D": "10 yaş üstü"}, "answer": "A", "explanation": "Boyu 150 cm'den ve ağırlığı 36 kg'dan az olan çocukların araç içinde çocuk koltuğuna bağlanması zorunludur."}, {"id": 76, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Sürücü belgesi (ehliyet) sahibi olmadan karayolunda araç kullananlara hangi ceza uygulanır?", "options": {"A": "Sadece uyarı cezası", "B": "İdari para cezası ve aracın bağlanması (ruhsat sahibine de ceza)", "C": "Hiçbir ceza uygulanmaz", "D": "Sadece araç muayenesi iptal edilir"}, "answer": "B", "explanation": "Ehliyetsiz araç kullanan kişiye ve aracını ehliyetsiz kişiye veren araç sahibine yüklü idari para cezası kesilir."}, {"id": 77, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Trafikte yeşil ışıktan hemen sonra yanan sarı ışık sürücüye neyi bildirir?", "options": {"A": "Hızlanmasını", "B": "Kırmızı ışığın geleceğini ve emniyetle durulabilecekse durulması gerektiğini", "C": "Geri vitese geçilmesini", "D": "Farların açılmasını"}, "answer": "B", "explanation": "Yeşilden sonraki sarı ışık durmaya hazırlıktır. Emniyetle durulamayacak mesafede olanlar kavşağı terk eder."}, {"id": 78, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Şerit izleme ve değiştirme kurallarına göre, sürücüler ne zaman şerit değiştirmelidir?", "options": {"A": "Canları her istediğinde", "B": "Dönüş, duraklama, park etme veya geçme gibi zorunlu hallerde ve sinyal vererek", "C": "Sinyal vermeden aniden", "D": "Kavşağın tam ortasında"}, "answer": "B", "explanation": "Şerit değiştirmeden önce niyet sinyalle bildirilmeli, aynalar kontrol edilmeli ve güvenli mesafe varsa geçilmelidir."}, {"id": 79, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Aracın aküsü takılırken kutup başları hangi sırayla bağlanmalıdır?", "options": {"A": "Önce eksi (-) sonra artı (+)", "B": "Önce artı (+) sonra eksi (-)", "C": "Fark etmez", "D": "İkisi aynı anda"}, "answer": "B", "explanation": "Akü takılırken kısa devreyi önlemek için önce (+) artı kutup, ardından (-) eksi (şase) kutup başı takılır. Sökerken ise önce eksi sökülür."}, {"id": 80, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Akü elektrolit seviyesi plakaların ne kadar üzerinde olmalıdır?", "options": {"A": "1 cm altında", "B": "1 cm (yaklaşık 10-15 mm) üzerinde", "C": "Tam plaka hizasında", "D": "Kabın ağzına kadar dolu"}, "answer": "B", "explanation": "Elektrolit seviyesi kurşun plakaların 1 cm üzerinde olmalı ve eksildiğinde sadece saf su ilave edilmelidir."}, {"id": 81, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Lastiklerin üzerinde yazan \"195/65 R 15\" ifadesindeki \"15\" sayısı neyi belirtir?", "options": {"A": "Lastiğin hız sınırını", "B": "Jant çapını (inç cinsinden)", "C": "Lastiğin taban genişliğini", "D": "Üretim yılını"}, "answer": "B", "explanation": "195: Taban genişliği (mm), 65: Yanak kesit oranı (%), R: Radyal karkas, 15: Jant çapıdır (inç)."}, {"id": 82, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "ABS fren sisteminin sürücüye sağladığı en büyük avantaj hangisidir?", "options": {"A": "Fren mesafesini sıfıra indirmesi", "B": "Sert frende tekerleklerin kilitlenmesini önleyerek direksiyon hakimiyetinin korunmasını sağlamak", "C": "Yakıtı yarı yarıya düşürmek", "D": "Balataları hiç eskitmemek"}, "answer": "B", "explanation": "ABS kilitlenmeyi önler; böylece ani fren anında sürücü direksiyonu çevirerek engelden kaçabilir."}, {"id": 83, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Egzozdan mavi renkli duman çıkması motor hakkında neyi gösterir?", "options": {"A": "Zengin yakıt karışımı yakıldığını", "B": "Motorun yağ yaktığını (segman veya supap lastiklerinin aşındığını)", "C": "Soğutma suyunun bittiğini", "D": "Ateşlemenin kusursuz olduğunu"}, "answer": "B", "explanation": "Egzozdan mavi duman motorun yağ yaktığını, siyah duman fazla yakıt (zengin karışım) yaktığını, beyaz duman ise su buharını gösterir."}, {"id": 84, "category": "adab", "category_title": "Trafik Adabı", "question": "Hatalı sollama yapan bir sürücüyle karşı karşıya kalındığında korna çalıp selektörle üzerine sürmek yerine sağa yanaşıp yol açmak hangi erdemdir?", "options": {"A": "Korkaklık", "B": "Sağduyu, hoşgörü ve kaza önleyici tutum", "C": "Acemilik", "D": "Kuralları umursamamak"}, "answer": "B", "explanation": "Trafikte karşı taraf hata yapsa dahi inatlaşmayıp kazayı önleyici manevra yapmak en olgun sürücü tutumudur."}, {"id": 85, "category": "adab", "category_title": "Trafik Adabı", "question": "Toplu taşıma veya okul servislerinin duraklardan çıkış yapmasına izin vermek neyin göstergesidir?", "options": {"A": "Zaman kaybının", "B": "Trafik kültürünün ve kamu yararına saygının", "C": "Hız yapamadığının", "D": "Acemi sürücü olunduğunun"}, "answer": "B", "explanation": "Toplu taşıma ve servis araçlarına yol vermek onlarca insanın güvenli ve dakik ulaşımına katkı sağlar."}, {"id": 86, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Otoyola giriş yaparken kullanılan hızlanma şeridinin adı nedir?", "options": {"A": "Yavaşlama (ayrılma) şeridi", "B": "Katılma (hızlanma) şeridi", "C": "Emniyet şeridi", "D": "Tırmanma şeridi"}, "answer": "B", "explanation": "Otoyola girerken otoyoldaki araçların akış hızına ulaşmak için hızlanma (katılma) şeridi kullanılır."}, {"id": 87, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Otoyoldan çıkış yaparken kullanılan şeridin adı nedir?", "options": {"A": "Ayrılma (yavaşlama) şeridi", "B": "Katılma şeridi", "C": "Sol şerit", "D": "Orta şerit"}, "answer": "A", "explanation": "Otoyoldan çıkmadan önce hız düşürmek için ayrılma (yavaşlama) şeridine geçilir."}, {"id": 88, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Emniyet şeridi aşağıdakilerden hangisi için KULLANILAMAZ?", "options": {"A": "Ambulans ve itfaiye geçişi", "B": "Arıza yapan aracın zorunlu beklemesi", "C": "Trafik sıkışıklığında diğer araçları geçmek (kaçmak) için", "D": "Polis araçlarının acil görev intikali"}, "answer": "C", "explanation": "Emniyet şeridi acil araçlar ve arıza halleri içindir. Trafikte kaçamak yapmak için kullanılması kesinlikle yasaktır ve ağır cezası vardır."}, {"id": 89, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Geçiş üstünlüğüne sahip bir aracın bu hakkı kullanabilmesi için şart nedir?", "options": {"A": "Her zaman kullanabilir", "B": "Yalnızca görev halinde ve can-mal güvenliğini tehlikeye sokmamak şartıyla", "C": "Eve giderken", "D": "Yemek molasına yetişirken"}, "answer": "B", "explanation": "Geçiş üstünlüğü yalnızca görev esnasında, tepe lambası ve sireni açıkken kullanılabilir."}, {"id": 90, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Sara (epilepsi) krizi geçiren bir kazazedeye ilk yardımda ne YAPILMALIDIR?", "options": {"A": "Ağzı zorla açılarak tahta kaşık sokulmalıdır", "B": "Soğan koklatılmalı ve tokat atılmalıdır", "C": "Krizin kendiliğinden geçmesi beklenmeli, başı yumuşak bir şeyle desteklenip etraftaki tehlikeli eşyalar uzaklaştırılmalıdır", "D": "Kolları sıkıca bağlanmalıdır"}, "answer": "C", "explanation": "Sara krizinde kilitlenen çene zorla açılmaz, soğan koklatılmaz. Baş korunur, etraftaki sert cisimler uzaklaştırılıp nöbetin bitmesi beklenir."}, {"id": 91, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Göze yabancı bir cisim (örneğin metal çapak veya çivi) battığında ilk yardım kuralı nedir?", "options": {"A": "Cisim hemen çekip çıkarılmalıdır", "B": "Cisme dokunulmaz, her iki göz kapatılarak temiz bir bezle korunup acil servise gidilir", "C": "Göz ovuşturulmalıdır", "D": "Göz kolonyayla yıkanmalıdır"}, "answer": "B", "explanation": "Batan cisim asla çıkarılmaz; gözlerin birlikte hareket etmesini önlemek için iki göz birden kapatılıp sevk edilir."}, {"id": 92, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Manuel vitesli araçlarda kalkış yaparken debriyaj pedalına nasıl basılıp bırakılmalıdır?", "options": {"A": "Aniden bırakılmalıdır", "B": "Debriyaja tam basılır, kavramaya kadar yavaşça bırakılıp gaz verilir", "C": "Hiç bırakılmaz", "D": "Frenle aynı anda sertçe bırakılır"}, "answer": "B", "explanation": "Kavrama noktasına kadar yumuşakça bırakılarak aracın sarsıntısız ve stop etmeden kalkması sağlanır."}, {"id": 93, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Otomatik vitesli araçlarda aracı park edip motoru stop etmeden önce vites kolu hangi konuma getirilmelidir?", "options": {"A": "D (Drive)", "B": "R (Reverse)", "C": "P (Park)", "D": "N (Neutral)"}, "answer": "C", "explanation": "Otomatik viteste park kilidi mekanizmasını devreye sokmak için vites \"P\" konumuna alınmalıdır."}, {"id": 94, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte karşılaştığınız bir sürücünün size yol vermesi durumunda dörtlü flaşörle veya el işaretiyle teşekkür etmek neyi ifade eder?", "options": {"A": "Zayıflık göstergesidir", "B": "Gelişmiş bir nezaket ve karşılıklı saygı kültürünü", "C": "Trafik cezasını", "D": "Kural ihlalini"}, "answer": "B", "explanation": "Teşekkür etmek trafikteki stresi azaltan ve iyi niyet döngüsü yaratan çok zarif bir adab davranışıdır."}, {"id": 95, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Görüş açısı yetersiz olan dar tepe üstlerinde ve keskin virajlarda sürücüler nasıl davranmalıdır?", "options": {"A": "Hızlanıp hemen geçmelidir", "B": "Hızını azaltmalı, şeridinin sağına yanaşmalı ve korna/selektörle gelişini bildirmelidir", "C": "Sol şeride geçmelidir", "D": "Farları söndürmelidir"}, "answer": "B", "explanation": "Görüşün kısıtlı olduğu tepe üstlerinde karşıdan gelen araca çarpmamak için sağa yanaşılır ve hız kesilir."}, {"id": 96, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aksine bir işaret yoksa kavşaklarda geçiş hakkı kuralına göre kontrolsüz kavşakta soldaki araç kime yol vermelidir?", "options": {"A": "Sağındaki araca", "B": "Arkasındaki araca", "C": "Küçük araca", "D": "Kırmızı renkli araca"}, "answer": "A", "explanation": "Kontrolsüz kavşaklarda genel kural: Sürücüler sağından gelen araca yol vermek zorundadır."}, {"id": 97, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Motor çalışırken yağ basınç ikaz lambası yanarsa ilk yapılacak işlem nedir?", "options": {"A": "Sürüşe devam edip sanayiye gitmek", "B": "Aracı derhal durdurup kontağı kapatmak", "C": "Klimayı çalıştırmak", "D": "Gaza sonuna kadar basmak"}, "answer": "B", "explanation": "Yağ lambası yanarken motor çalıştırılırsa yataklar sarar ve motor birkaç dakika içinde kilitlenir (tamamen yanar)."}, {"id": 98, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Elektrik çarpması sonucu bilincini yitiren kazazedeye ilk olarak ne yapılmalıdır?", "options": {"A": "Hemen çıplak elle tutulup çekilmelidir", "B": "Öncelikle elektrik akımı ana şalterden kesilmeli veya yalıtkan (tahta/plastik) bir cisimle temas kesilmelidir", "C": "Üzerine su dökülmelidir", "D": "Hemen kalp masajı yapılmalıdır"}, "answer": "B", "explanation": "İlk yardımcının kendi güvenliği için asla çıplak elle dokunulmaz, şalter indirilir ya da kuru tahtayla akım uzaklaştırılır."}, {"id": 99, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte bir hata yapan sürücüye karşı öfkeyle selektör yapıp bağırmak yerine durumu olgunlukla karşılamak ne sağlar?", "options": {"A": "Trafik ortamında barış ve güvenlik iklimi", "B": "Kavga çıkmasını", "C": "Suçlunun kaçmasını", "D": "Zaman kaybını"}, "answer": "A", "explanation": "Tolerans ve olgunluk trafikte can güvenliğini sağlayan en önemli psikolojik faktördür."}, {"id": 100, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Alkolmetre ile yapılan ölçümde promil sınırını aşan bir sürücüye ilk yakalanışında hangi yaptırım uygulanır?", "options": {"A": "Sürücü belgesi 6 ay süreyle geri alınır ve idari para cezası kesilir", "B": "Sürücü belgesi ömür boyu iptal edilir", "C": "Sadece uyarı verilir", "D": "Araç hurdaya ayrılır"}, "answer": "A", "explanation": "İlk kez alkollü araç kullanan sürücünün ehliyetine 6 ay el konur, aracı bağlanır ve para cezası verilir."}];
+  
+  let currentExamMode = 'deneme1';
+  let activeQuestions = [];
   let currentIndex = 0;
-  let userAnswers = {}; // { questionId: 'A' }
+  let userAnswers = {}; // { qId: 'A' }
   let timerSeconds = 45 * 60;
   let timerInterval = null;
 
-  const ALL_QUESTIONS = [{"id": 1, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Aşağıdakilerden hangisi kaza sonuçlarının ağırlaşmasını önlemek için olay yerinin değerlendirilmesi işlemini kapsar?", "options": {"A": "Koruma", "B": "Bildirme", "C": "Kurtarma", "D": "Tedavi etme"}, "answer": "A", "explanation": "İlk yardımın temel uygulamaları Koruma, Bildirme ve Kurtarma (KBK) şeklindedir. Olay yerinin güvenliğinin sağlanması 'Koruma' basamağıdır."}, {"id": 2, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Yetişkinlerde temel yaşam desteği uygulanırken yapılan kalp masajında göğüs kemiği kaç cm aşağı inecek şekilde baskı uygulanır?", "options": {"A": "2 cm", "B": "3 cm", "C": "5 cm", "D": "7 cm"}, "answer": "C", "explanation": "Yetişkinlerde ve çocuklarda göğüs kemiği 5 cm, bebeklerde ise 4 cm çökecek şekilde baskı uygulanır."}, {"id": 3, "category": "ilkyardim", "category_title": "İlk Yardım", "question": "Solunum yolu tam tıkanmış bir kazazedede aşağıdaki belirtilerden hangisi görülür?", "options": {"A": "Konuşabilir", "B": "Öksürebilir", "C": "Nefes alabilir", "D": "Ellerini boynuna götürür, acı çeker ve morarır"}, "answer": "D", "explanation": "Tam tıkanmada Heimlich manevrası uygulanır. Belirtisi konuşamama, nefes alamama, elleri boyna götürme ve morarmadır."}, {"id": 4, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Aksine bir işaret yoksa yerleşim yeri dışındaki şehirlerarası çift yönlü karayollarında otomobiller için azami hız sınırı saatte kaç kilometredir?", "options": {"A": "70 km/s", "B": "80 km/s", "C": "90 km/s", "D": "100 km/s"}, "answer": "C", "explanation": "Otomobiller için şehir içi 50, şehirlerarası çift yönlü yolda 90, bölünmüş yolda 110, otoyolda 130/140 km/s hız sınırıdır."}, {"id": 5, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Işıklı trafik işaret cihazında yanan hangi ışık, ikaz mahiyetinde olup sırasıyla kırmızı ışığın yanacağını bildirir?", "options": {"A": "Yeşille birlikte yanan sarı ışık", "B": "Sarıdan sonra yanan yeşil ışık", "C": "Fasılalı yanan sarı ışık", "D": "Fasılalı yanan kırmızı ışık"}, "answer": "A", "explanation": "Yeşilden sonra yanan sarı ışık durulması gerektiğini ve kırmızı ışığın geleceğini bildirir."}, {"id": 6, "category": "trafik", "category_title": "Trafik ve Çevre", "question": "Şekildeki trafik işareti aşağıdakilerden hangisini bildirir?", "question_detail": "(Kırmızı üçgen içinde siyah iki eğri dalga)", "options": {"A": "Yolun kaygan olduğunu", "B": "Tehlikeli viraj olduğunu", "C": "Kasisli yol olduğunu", "D": "Yolda çalışma olduğunu"}, "answer": "C", "explanation": "Bu işaret kasisli yol kaplamasını bildirir; hız azaltılmalıdır."}, {"id": 7, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Seyir halindeyken gösterge panelinde yağ lambası yandığında sürücünün yapması gereken doğru hareket hangisidir?", "options": {"A": "Hızı artırmak", "B": "Yola aynı hızla devam etmek", "C": "Aracı derhal durdurup kontağı kapatmak", "D": "Far ve sinyalleri yakmak"}, "answer": "C", "explanation": "Motor yağ lambası veya hararet lambası yandığında araç derhal güvenli bir yerde durdurulmalı ve kontak kapatılmalıdır."}, {"id": 8, "category": "motor", "category_title": "Motor ve Araç Tekniği", "question": "Aşağıdakilerden hangisi motorun hararet yapmasına (aşırı ısınmasına) sebep olur?", "options": {"A": "Radyatör hortumlarında sızıntı olması ve suyun azalması", "B": "Lastik hava basıncının yüksek olması", "C": "Fren hidroliğinin fazla olması", "D": "Akü kutup başlarının gevşemesi"}, "answer": "A", "explanation": "Soğutma suyunun azalması, vantilatör kayışının kopması veya termostat arızası motorun hararet yapmasına yol açar."}, {"id": 9, "category": "adab", "category_title": "Trafik Adabı", "question": "Yağmurlu bir günde araç sürerken kaldırımdaki yayalara su sıçratmamak için özen gösterilmesi hangi trafik adabı değerini gösterir?", "options": {"A": "İnatlaşma", "B": "Saygı ve Nezaket", "C": "Sabırsızlık", "D": "Bencillik"}, "answer": "B", "explanation": "Diğer yol kullanıcılarına ve yayalara zarar vermemek, saygı, empati ve nezaket göstergesidir."}, {"id": 10, "category": "adab", "category_title": "Trafik Adabı", "question": "Trafikte kırmızı ışıkta beklerken yeşil ışık yanar yanmaz arkadaki sürücünün hemen kornaya basması neyin eksikliğini gösterir?", "options": {"A": "Sabır", "B": "Öfke", "C": "Cesaret", "D": "İnatçılık"}, "answer": "A", "explanation": "Yeşil ışık yanar yanmaz sabırsızca kornaya basmak sabır ve hoşgörü eksikliğidir."}];
-  function loadQuestions(category = 'all') {
-    if (category === 'all') {
-      questions = ALL_QUESTIONS;
+  function loadQuestions(mode = 'deneme1') {
+    currentExamMode = mode;
+    if (mode === 'deneme1') {
+      activeQuestions = ALL_QUESTIONS.slice(0, 50);
+    } else if (mode === 'deneme2') {
+      activeQuestions = ALL_QUESTIONS.slice(50, 100);
+    } else if (mode === 'all') {
+      activeQuestions = ALL_QUESTIONS;
     } else {
-      questions = ALL_QUESTIONS.filter(q => q.category === category);
+      activeQuestions = ALL_QUESTIONS.filter(q => q.category === mode);
     }
     currentIndex = 0;
     userAnswers = {};
@@ -333,22 +390,40 @@
   }
 
   function renderCurrentQuestion() {
-    if (questions.length === 0) return;
-    const q = questions[currentIndex];
+    if (activeQuestions.length === 0) return;
+    const q = activeQuestions[currentIndex];
 
     document.getElementById('qCatTag').innerText = q.category_title;
-    document.getElementById('qIndex').innerText = `Soru ${currentIndex + 1}/${questions.length}`;
+    document.getElementById('qIndex').innerText = `Soru ${currentIndex + 1}/${activeQuestions.length}`;
     document.getElementById('qText').innerText = q.question;
+
+    // Progress bar
+    const pct = ((currentIndex + 1) / activeQuestions.length) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
 
     const optContainer = document.getElementById('qOptions');
     optContainer.innerHTML = '';
 
+    const answered = !!userAnswers[q.id];
     const letters = ['A', 'B', 'C', 'D'];
+
     letters.forEach(letter => {
-      const isSelected = userAnswers[q.id] === letter;
       const optDiv = document.createElement('div');
-      optDiv.className = 'option-item' + (isSelected ? ' selected' : '');
-      optDiv.onclick = () => selectOption(q.id, letter);
+      optDiv.className = 'option-item';
+      
+      if (answered) {
+        if (letter === q.answer) {
+          optDiv.classList.add('correct');
+        } else if (userAnswers[q.id] === letter) {
+          optDiv.classList.add('wrong');
+        }
+      }
+
+      optDiv.onclick = () => {
+        if (!answered) {
+          selectOption(q.id, letter);
+        }
+      };
 
       optDiv.innerHTML = `
         <div class="option-letter">${letter}</div>
@@ -357,8 +432,18 @@
       optContainer.appendChild(optDiv);
     });
 
-    document.getElementById('nextBtn').style.display = currentIndex < questions.length - 1 ? 'flex' : 'none';
-    document.getElementById('finishBtn').style.display = currentIndex === questions.length - 1 ? 'flex' : 'none';
+    // Explanation card
+    const expCard = document.getElementById('qExpCard');
+    const expText = document.getElementById('qExpText');
+    if (answered && q.explanation) {
+      expText.innerText = q.explanation;
+      expCard.style.display = 'block';
+    } else {
+      expCard.style.display = 'none';
+    }
+
+    document.getElementById('nextBtn').style.display = currentIndex < activeQuestions.length - 1 ? 'flex' : 'none';
+    document.getElementById('finishBtn').style.display = currentIndex === activeQuestions.length - 1 ? 'flex' : 'none';
   }
 
   function selectOption(qId, letter) {
@@ -374,28 +459,25 @@
   }
 
   function nextQuestion() {
-    if (currentIndex < questions.length - 1) {
+    if (currentIndex < activeQuestions.length - 1) {
       currentIndex++;
       renderCurrentQuestion();
     }
   }
 
   function finishExam() {
-    // AdMob Geçiş Reklamı (Interstitial) simülasyonu
-    alert('🎬 Google AdMob Geçiş Reklamı Gösteriliyor...\n(Kullanıcı sınavı bitirdiği an tam ekran reklam gösterilir ve gelir hanenize yazılır).');
-
     let correct = 0;
     let wrong = 0;
     let empty = 0;
 
-    questions.forEach(q => {
+    activeQuestions.forEach(q => {
       const userAns = userAnswers[q.id];
       if (!userAns) empty++;
       else if (userAns === q.answer) correct++;
       else wrong++;
     });
 
-    const score = Math.round((correct / questions.length) * 100);
+    const score = Math.round((correct / activeQuestions.length) * 100);
     const passed = score >= 70;
 
     document.getElementById('scoreVal').innerText = score + ' Puan';
@@ -420,13 +502,13 @@
 
   function closeModalAndRestart() {
     document.getElementById('scoreModal').style.display = 'none';
-    loadQuestions('all');
+    loadQuestions(currentExamMode);
   }
 
-  function switchCategory(cat, btn) {
+  function switchCategory(mode, btn) {
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    loadQuestions(cat);
+    loadQuestions(mode);
   }
 
   function startTimer() {
@@ -445,7 +527,8 @@
     }, 1000);
   }
 
-  loadQuestions('all');
+  // Initial load
+  loadQuestions('deneme1');
 </script>
 </body>
 </html>
